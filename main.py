@@ -21,10 +21,14 @@ class RoastRequest(BaseModel):
     repo_url: str
     mode: str = "nuclear"
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+INDEX_PATH = os.path.join(BASE_DIR, "index.html")
+
+
 @app.get("/")
 def serve_ui():
-    if os.path.exists("index.html"):
-        return FileResponse("index.html")
+    if os.path.exists(INDEX_PATH):
+        return FileResponse(INDEX_PATH)
     return {"status": "online", "message": "Git-Trace API is running hot."}
 
 @app.get("/api/health")
@@ -59,3 +63,8 @@ async def generate_roast(req: RoastRequest):
         "commits": commits,
         "story": story
     }
+
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
