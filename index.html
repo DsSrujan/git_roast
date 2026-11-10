@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>GIT-TRACE // ARCHIVAL CODEBASE AUTOPSY &amp; ROAST</title>
+<!-- Tailwind CSS v3 with Forms & Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Fonts: Space Grotesk, JetBrains Mono, Syne, UnifrakturCook/Cinzel decorative -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800;900&amp;family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,700;1,400&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/>
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            parchment: {
+              DEFAULT: '#f5f0e6',
+              light: '#fcf9f2',
+              dark: '#e8e0ce',
+              border: '#2a2825'
+            },
+            blueprint: {
+              navy: '#0c2340',
+              deep: '#06162a',
+              mid: '#143864',
+              grid: '#1a4375',
+              cyan: '#7ec8e3'
+            },
+            hazard: {
+              amber: '#ffb200',
+              gold: '#e5a000',
+              deep: '#c68400'
+            },
+            ink: '#121212'
+          },
+          fontFamily: {
+            mono: ['"JetBrains Mono"', 'monospace'],
+            blueprint: ['"Space Grotesk"', 'sans-serif'],
+            classical: ['"Cinzel"', 'serif']
+          }
+        }
+      }
+    };
+  </script>
+<!-- BEGIN: Custom Architectural & Blueprint Styles -->
+<style data-purpose="blueprint-patterns">
+    /* Subtle parchment grain & drafting grid */
+    .bg-drafting-canvas {
+      background-color: #f5f0e6;
+      background-image: 
+        radial-gradient(#2b2823 0.65px, transparent 0.65px),
+        linear-gradient(to right, rgba(40, 36, 30, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(40, 36, 30, 0.04) 1px, transparent 1px);
+      background-size: 24px 24px, 48px 48px, 48px 48px;
+    }
+
+    /* Blueprint dark navy grid */
+    .bg-blueprint-grid {
+      background-color: #0c2340;
+      background-image: 
+        linear-gradient(rgba(126, 200, 227, 0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(126, 200, 227, 0.12) 1px, transparent 1px);
+      background-size: 20px 20px;
+    }
+
+    /* Greek Key / Meander geometric pattern border */
+    .greek-key-border {
+      background-color: #0c2340;
+      background-image: repeating-linear-gradient(
+        90deg,
+        #f5f0e6 0,
+        #f5f0e6 4px,
+        #0c2340 4px,
+        #0c2340 8px,
+        #f5f0e6 8px,
+        #f5f0e6 16px,
+        #0c2340 16px,
+        #0c2340 24px
+      );
+      height: 10px;
+    }
+
+    /* Fluted column fill pattern */
+    .column-fluting {
+      background: repeating-linear-gradient(
+        90deg,
+        #f5f0e6 0px,
+        #f5f0e6 4px,
+        #2a2825 5px,
+        #fcf9f2 6px,
+        #dcd3c1 9px,
+        #2a2825 10px
+      );
+    }
+
+    /* Astrolabe / Celestial Dial Rotating Background */
+    @keyframes slow-rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    .astrolabe-spin {
+      animation: slow-rotate 240s linear infinite;
+    }
+    .astrolabe-spin-reverse {
+      animation: slow-rotate 180s linear infinite reverse;
+    }
+
+    /* Blinking Terminal Cursor */
+    @keyframes blink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+    .cursor-blink {
+      animation: blink 1s infinite;
+    }
+
+    /* Drafting Crosshair Lines */
+    .crosshair-corner::before,
+    .crosshair-corner::after {
+      content: '';
+      position: absolute;
+      background-color: #ffb200;
+    }
+  </style>
+<!-- END: Custom Architectural & Blueprint Styles -->
+</head>
+<body class="bg-drafting-canvas text-ink font-blueprint min-h-screen selection:bg-hazard-amber selection:text-black relative overflow-x-hidden">
+<!-- BEGIN: Perimeter Greek Key Top Accent -->
+<div class="w-full h-2.5 bg-blueprint-navy border-b border-black flex items-center justify-between px-4 overflow-hidden" data-purpose="perimeter-meander-pattern">
+<div class="w-full h-full opacity-70" style="background-image: repeating-linear-gradient(90deg, #ffb200 0px, #ffb200 6px, #0c2340 6px, #0c2340 12px, #f5f0e6 12px, #f5f0e6 18px, #0c2340 18px, #0c2340 24px);"></div>
+</div>
+<!-- END: Perimeter Greek Key Top Accent -->
+<!-- BEGIN: Main Page Frame Wrapper -->
+<div class="max-w-6xl mx-auto px-4 sm:px-8 pt-6 pb-28 relative">
+<!-- BEGIN: Top Navigation Bar -->
+<header class="border-2 border-black bg-parchment-light px-4 py-3 flex flex-wrap items-center justify-between gap-4 mb-6 shadow-[3px_3px_0px_#000000]" data-purpose="top-header-chrome">
+<!-- Left: Project Identity -->
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-blueprint-navy text-hazard-amber font-mono font-black flex items-center justify-center border-2 border-black text-sm shadow-[1px_1px_0px_#000]">
+          GT
+        </div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-mono text-xs font-black tracking-wider uppercase text-blueprint-navy">GIT-TRACE // CODEBASE AUTOPSY</span>
+<span class="inline-block w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+</div>
+<p class="font-mono text-[10px] text-black/60 tracking-tight">SARCASTIC GIT COMMIT STORYTELLER</p>
+</div>
+</div>
+<!-- Center: Technical Badges -->
+<div class="hidden md:flex items-center gap-2 font-mono text-[10px]">
+<div class="border border-black bg-parchment px-2 py-0.5 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-emerald-600"></span>
+<span>FASTAPI</span>
+</div>
+<div class="border border-black bg-parchment px-2 py-0.5 flex items-center gap-1.5">
+<span class="text-hazard-amber font-bold">●</span>
+<span>GROQ AI</span>
+</div>
+<div class="border border-black bg-parchment px-2 py-0.5 text-black/80">
+          PORT: 8000
+        </div>
+</div>
+<!-- Right: System Status Tag -->
+<div class="flex items-center gap-2 font-mono text-xs">
+<div class="bg-hazard-amber text-black border-2 border-black font-bold px-3 py-1 shadow-[2px_2px_0px_#000] flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-black"></span>
+<span class="tracking-wider">SYS ONLINE</span>
+</div>
+</div>
+</header>
+<!-- END: Top Navigation Bar -->
+<!-- BEGIN: Hero Section with Celestial Astrolabe Dial Background -->
+<section class="relative border-2 border-black bg-parchment p-6 sm:p-10 mb-8 overflow-hidden shadow-[5px_5px_0px_#000]" data-purpose="hero-astrolabe-display">
+<!-- Astrolabe Vector Compass Dial (Watermark in background) -->
+<div aria-hidden="true" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20 overflow-hidden">
+<svg class="astrolabe-spin w-[720px] h-[720px]" viewbox="0 0 500 500">
+<circle cx="250" cy="250" fill="none" r="230" stroke="#0c2340" stroke-dasharray="4 4" stroke-width="1.5"></circle>
+<circle cx="250" cy="250" fill="none" r="200" stroke="#0c2340" stroke-width="1"></circle>
+<circle cx="250" cy="250" fill="none" r="160" stroke="#0c2340" stroke-width="2"></circle>
+<circle cx="250" cy="250" fill="none" r="110" stroke="#0c2340" stroke-dasharray="2 4" stroke-width="0.75"></circle>
+<!-- Ray lines -->
+<line stroke="#0c2340" stroke-width="0.75" x1="250" x2="250" y1="20" y2="480"></line>
+<line stroke="#0c2340" stroke-width="0.75" x1="20" x2="480" y1="250" y2="250"></line>
+<line stroke="#0c2340" stroke-dasharray="4 4" stroke-width="0.5" x1="87" x2="413" y1="87" y2="413"></line>
+<line stroke="#0c2340" stroke-dasharray="4 4" stroke-width="0.5" x1="87" x2="413" y1="413" y2="87"></line>
+<!-- Astrolabe Ring Degrees -->
+<circle cx="250" cy="250" fill="none" r="240" stroke="#0c2340" stroke-width="0.5"></circle>
+</svg>
+</div>
+<!-- Top Technical Hero Metadata -->
+<div class="relative z-10 flex flex-wrap items-center justify-between gap-3 border-b-2 border-black pb-3 mb-5 font-mono text-xs">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 bg-black inline-block"></span>
+<span class="tracking-widest font-bold text-black uppercase">GIT COMMIT ANALYSIS &amp; CODE REVIEW ENGINE</span>
+</div>
+<div class="bg-hazard-amber text-black px-2.5 py-0.5 border border-black font-bold uppercase tracking-wider text-[11px] shadow-[2px_2px_0px_#000]">
+          ● INSTANT SHALLOW FETCH // AUTO-CLEANUP
+        </div>
+</div>
+<!-- Massive Architectural Slab Title: GIT-TRACE -->
+<div class="relative z-10 my-4 text-center sm:text-left">
+<!-- Heavy Architectural Slab Typography with Cutouts and Bounding Guides -->
+<div class="relative py-2">
+<!-- Drafting Dimension Guides -->
+<div class="hidden sm:block absolute -top-1 left-0 right-0 h-3 border-t border-dashed border-black/40 text-[9px] font-mono text-black/50">
+<span class="absolute left-1 -top-2">|← X: 0.00</span>
+<span class="absolute right-1 -top-2">X: 1024.00 →|</span>
+</div>
+<h1 class="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-black font-blueprint tracking-tighter uppercase text-blueprint-navy leading-none select-none drop-shadow-[4px_4px_0px_#ffb200]">
+            GIT-TRACE
+          </h1>
+<!-- Secondary Subtitle Banner with Drafting Bounding Line -->
+<div class="mt-2 flex flex-wrap items-center justify-between gap-2 border-t-2 border-b-2 border-black py-2 bg-parchment-light/80">
+<span class="font-mono font-bold tracking-widest text-xs sm:text-sm text-black flex items-center gap-2">
+<span class="text-hazard-amber">■</span> ROAST EDITION // THE CODEBASE AUTOPSY
+            </span>
+<span class="font-mono text-xs text-black/70">
+              SYS: // GROQ LPUS // REPO AUTOPSY
+            </span>
+</div>
+</div>
+<!-- Archival Slogan Quote -->
+<div class="mt-4 p-3 bg-blueprint-navy text-parchment border-2 border-black flex items-center justify-between flex-wrap gap-2 shadow-[3px_3px_0px_#ffb200]">
+<p class="font-mono text-xs sm:text-sm font-semibold tracking-wide italic">
+            “ A BRUTALLY HONEST POST-MORTEM OF YOUR COMMIT CRIMES &amp; ARCHITECTURAL DELUSIONS ”
+          </p>
+<span class="font-mono text-[10px] bg-hazard-amber text-black font-bold px-2 py-0.5">VERDICT 100% FATAL</span>
+</div>
+</div>
+</section>
+<!-- END: Hero Section -->
+<!-- BEGIN: Interactive Ingestion & Severity Terminal Section -->
+<section class="mb-8 border-2 border-black bg-parchment-light shadow-[5px_5px_0px_#000]" data-purpose="repo-ingestion-module">
+<!-- Module Header Bar -->
+<div class="bg-blueprint-navy text-parchment px-4 py-2 flex items-center justify-between border-b-2 border-black">
+<div class="flex items-center gap-2 font-mono text-xs">
+<span class="w-3 h-3 bg-hazard-amber border border-black inline-block"></span>
+<span class="font-bold tracking-wider">MODULE 01: REPOSITORY INGESTION &amp; ROAST CALIBRATION</span>
+</div>
+<div class="font-mono text-[10px] text-parchment/60">
+          [TARGET: GIT REMOTE REPOSITORY]
+        </div>
+</div>
+<div class="p-6">
+<!-- Interactive Terminal Input Box -->
+<div class="border-2 border-black bg-white p-4 relative mb-6 shadow-inner font-mono">
+<div class="flex items-center justify-between border-b border-black/20 pb-2 mb-3 text-[11px] text-black/60">
+<span>DRAFTING CONSOLE // STDIN: BUFFER_INGEST</span>
+<span>CLONE DEPTH = 10 COMMITS</span>
+</div>
+<label class="block text-xs font-bold uppercase mb-1 tracking-wider text-blueprint-navy" for="repo-url-input">
+            Repository Remote Address:
+          </label>
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+<span class="text-xs text-blueprint-mid font-bold select-none whitespace-nowrap bg-parchment px-2 py-2 border border-black">
+              git-trace:~$ git clone --depth 10
+            </span>
+<input class="w-full bg-parchment-light border-2 border-black px-3 py-2 text-xs sm:text-sm font-mono focus:ring-0 focus:border-hazard-amber focus:bg-white text-ink transition-colors" id="repo-url-input" placeholder="e.g. https://github.com/facebook/react or username/repo" type="text" value="https://github.com/torvalds/linux"/>
+</div>
+<div class="mt-2 text-[10px] text-black/50 flex items-center gap-2">
+<span>READY TO FETCH AST AND COMMITS</span>
+<span class="inline-block w-2 h-3 bg-hazard-amber cursor-blink"></span>
+</div>
+</div>
+<!-- Roast Severity Matrix (4 Blueprint Rectangular Blocks) -->
+<div class="mb-6">
+<div class="flex items-center justify-between mb-3 font-mono text-xs">
+<span class="font-bold uppercase tracking-wider text-black">SELECT ROAST SEVERITY PROTOCOL:</span>
+<span class="text-hazard-deep font-semibold">[ WARNING: HIGH DAMAGE RISK ]</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+<!-- Tier 1: Mild Chuckle -->
+<label class="cursor-pointer border-2 border-black bg-parchment p-3 relative hover:bg-parchment-dark transition-all flex flex-col justify-between group">
+<input class="sr-only" name="severity_level" type="radio" value="mild"/>
+<div>
+<div class="flex items-center justify-between font-mono text-[10px] text-black/60 mb-1">
+<span>TIER I</span>
+<span>LVL: 25%</span>
+</div>
+<div class="font-mono font-bold text-xs sm:text-sm uppercase tracking-wide text-blueprint-navy mb-1">
+                  [ MILD CHUCKLE ]
+                </div>
+<p class="text-[11px] text-black/70 font-mono leading-tight">
+                  Junior PR code review with gentle side-eye and polite nitpicks on indentation.
+                </p>
+</div>
+<div class="mt-3 pt-2 border-t border-black/20 flex justify-between items-center text-[10px] font-mono">
+<span class="text-black/50 group-hover:text-black">SEVERITY: TAME</span>
+<span class="w-2.5 h-2.5 rounded-full border border-black bg-white group-hover:bg-black"></span>
+</div>
+</label>
+<!-- Tier 2: Senior Burnout (Active Selection) -->
+<label class="cursor-pointer border-2 border-black bg-hazard-amber/20 p-3 relative shadow-[3px_3px_0px_#000] flex flex-col justify-between ring-2 ring-hazard-amber">
+<input checked="" class="sr-only" name="severity_level" type="radio" value="senior"/>
+<span class="absolute -top-2.5 right-2 bg-hazard-amber text-black font-mono text-[9px] font-bold px-1.5 border border-black">SELECTED</span>
+<div>
+<div class="flex items-center justify-between font-mono text-[10px] text-black/80 mb-1">
+<span>TIER II</span>
+<span class="text-hazard-deep font-bold">LVL: 60%</span>
+</div>
+<div class="font-mono font-bold text-xs sm:text-sm uppercase tracking-wide text-blueprint-navy mb-1">
+                  [ SENIOR BURNOUT ]
+                </div>
+<p class="text-[11px] text-black font-mono leading-tight">
+                  10-year veteran sighing audibly into lukewarm instant coffee while reviewing your git log.
+                </p>
+</div>
+<div class="mt-3 pt-2 border-t border-black/40 flex justify-between items-center text-[10px] font-mono">
+<span class="font-bold text-black">SEVERITY: CYNICAL</span>
+<span class="w-3 h-3 bg-hazard-amber border-2 border-black"></span>
+</div>
+</label>
+<!-- Tier 3: Chaotic Tech Lead -->
+<label class="cursor-pointer border-2 border-black bg-parchment p-3 relative hover:bg-parchment-dark transition-all flex flex-col justify-between group">
+<input class="sr-only" name="severity_level" type="radio" value="chaotic"/>
+<div>
+<div class="flex items-center justify-between font-mono text-[10px] text-black/60 mb-1">
+<span>TIER III</span>
+<span>LVL: 85%</span>
+</div>
+<div class="font-mono font-bold text-xs sm:text-sm uppercase tracking-wide text-blueprint-navy mb-1">
+                  [ CHAOTIC TECH LEAD ]
+                </div>
+<p class="text-[11px] text-black/70 font-mono leading-tight">
+                  Unhinged Slack voice notes sent at 3:17 AM questioning your core existential legitimacy.
+                </p>
+</div>
+<div class="mt-3 pt-2 border-t border-black/20 flex justify-between items-center text-[10px] font-mono">
+<span class="text-black/50 group-hover:text-black">SEVERITY: SAVAGE</span>
+<span class="w-2.5 h-2.5 rounded-full border border-black bg-white group-hover:bg-black"></span>
+</div>
+</label>
+<!-- Tier 4: Kernel Panic Fatal -->
+<label class="cursor-pointer border-2 border-black bg-parchment p-3 relative hover:bg-parchment-dark transition-all flex flex-col justify-between group">
+<input class="sr-only" name="severity_level" type="radio" value="kernel"/>
+<div>
+<div class="flex items-center justify-between font-mono text-[10px] text-black/60 mb-1">
+<span>TIER IV</span>
+<span>LVL: 100%</span>
+</div>
+<div class="font-mono font-bold text-xs sm:text-sm uppercase tracking-wide text-rose-900 mb-1">
+                  [ KERNEL PANIC // FATAL ]
+                </div>
+<p class="text-[11px] text-black/70 font-mono leading-tight">
+                  Total psychological annihilation of commit hygiene, circular deps, and life decisions.
+                </p>
+</div>
+<div class="mt-3 pt-2 border-t border-black/20 flex justify-between items-center text-[10px] font-mono">
+<span class="text-rose-900 font-bold">SEVERITY: LETHAL</span>
+<span class="w-2.5 h-2.5 rounded-full border border-black bg-white group-hover:bg-rose-900"></span>
+</div>
+</label>
+</div>
+</div>
+<!-- Massive Hazard Amber Trigger Button -->
+<button class="w-full py-4 px-6 bg-hazard-amber hover:bg-yellow-400 active:translate-y-1 transition-all border-2 border-black font-mono font-black text-sm sm:text-base md:text-lg tracking-wider text-black flex items-center justify-center gap-3 shadow-[5px_5px_0px_#0c2340]" id="btn-execute-autopsy" type="button">
+<span class="text-xl">⚡</span>
+<span>[ EXECUTE AUTOPSY // INITIATE ROAST → ]</span>
+<span class="font-mono text-xs bg-black text-hazard-amber px-2 py-0.5 border border-black hidden sm:inline-block">DEPTH: 10</span>
+</button>
+</div>
+</section>
+<!-- END: Ingestion Section -->
+<!-- BEGIN: Live Blueprint Telemetry & Churn Ledger (Matching Blue Aesthetic Image 6) -->
+<section class="mb-8 border-2 border-black bg-blueprint-navy text-parchment p-6 relative shadow-[6px_6px_0px_#000]" data-purpose="telemetry-blueprint-terminal">
+<!-- Top Decorative Blueprint Ledger Header -->
+<div class="flex flex-wrap items-center justify-between gap-3 border-b border-blueprint-cyan/30 pb-3 mb-4 font-mono text-xs">
+<div class="flex items-center gap-2 text-hazard-amber">
+<span class="text-sm font-bold">SYS: SUBPROCESS STREAMING</span>
+<span class="text-parchment/60">:: GROQ_LLAMA_3_1_8B_INFERENCE</span>
+</div>
+<div class="flex items-center gap-4 text-parchment/70 text-[11px]">
+<span>LATENCY: 41ms</span>
+<span>TOKENS: 4,129/sec</span>
+<span id="status-tag" class="text-hazard-amber font-bold">STATUS: READY</span>
+</div>
+</div>
+<!-- Segmented Amber Progress / Churn Ticks -->
+<div class="my-4">
+<div class="flex items-center justify-between font-mono text-xs mb-1">
+<span class="text-parchment/80">GIT COMMIT HEURISTIC SCAN PROGRESS:</span>
+<span id="scan-progress-label" class="text-hazard-amber font-bold">STANDBY</span>
+</div>
+<!-- Discrete segmented tick mark progress bar -->
+<div class="grid grid-cols-24 gap-1 h-3.5 bg-blueprint-deep p-0.5 border border-blueprint-cyan/40">
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber"></div>
+<div class="bg-hazard-amber animate-pulse"></div>
+</div>
+</div>
+<!-- Subprocess Code Grid & Telemetry Breakdown -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-4 my-6 font-mono">
+<!-- Left: Live Log Output Stream -->
+<div id="telemetry-log-stream" class="lg:col-span-2 border border-blueprint-cyan/30 bg-blueprint-deep/80 p-3 text-[11px] text-parchment/80 space-y-1">
+<div class="text-blueprint-cyan font-bold border-b border-blueprint-cyan/20 pb-1 flex justify-between">
+<span>&gt;_ TELEMETRY DISPATCH</span>
+<span>BRANCH: refs/heads/main</span>
+</div>
+<p class="text-emerald-400">$ git fetch --depth 10 --no-tags --single-branch</p>
+<p class="text-parchment/70">[info] Ready to clone target repository</p>
+</div>
+<!-- Right: Telemetry Key Figures (Stat Box) -->
+<div class="border border-blueprint-cyan/30 bg-blueprint-deep/80 p-4 flex flex-col justify-between">
+<div>
+<span class="text-blueprint-cyan text-[10px] tracking-widest uppercase block mb-1">AGGREGATE SARCASM QUOTIENT</span>
+<div class="text-5xl font-black text-hazard-amber leading-none">100<span class="text-2xl text-parchment">%</span></div>
+<p class="text-[10px] text-parchment/60 mt-2 font-mono">MAXIMUM CYNICISM THRESHOLD REACHED</p>
+</div>
+<div class="border-t border-blueprint-cyan/20 pt-3 mt-4 space-y-1.5 text-xs">
+<div class="flex justify-between">
+<span class="text-parchment/60">Lines Churned:</span>
+<span class="font-bold text-parchment">+142 / -3,842</span>
+</div>
+<div class="flex justify-between">
+<span class="text-parchment/60">Blame Density:</span>
+<span class="font-bold text-hazard-amber">94.8% Avoidable</span>
+</div>
+<div class="flex justify-between">
+<span class="text-parchment/60">Coffee Burn:</span>
+<span class="font-bold text-parchment">14 Mugs / Night</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Commit Ledger Table -->
+<div class="border border-blueprint-cyan/30 overflow-x-auto" data-purpose="commit-churn-table">
+<table class="w-full text-left font-mono text-[11px]">
+<thead class="bg-blueprint-mid text-parchment border-b border-blueprint-cyan/30 uppercase text-[10px]">
+<tr>
+<th class="py-2 px-3">HASH</th>
+<th class="py-2 px-3">AUTHOR</th>
+<th class="py-2 px-3">COMMIT MESSAGE</th>
+<th class="py-2 px-3">DELTA</th>
+<th class="py-2 px-3 text-right">CYNICISM TAG</th>
+</tr>
+</thead>
+<tbody id="commit-table-body" class="divide-y divide-blueprint-cyan/15 text-parchment/90">
+<tr class="hover:bg-blueprint-mid/50 transition-colors">
+<td class="py-1.5 px-3 font-bold text-hazard-amber">c0ffee1</td>
+<td class="py-1.5 px-3 text-blueprint-cyan">sleepy_engineer</td>
+<td class="py-1.5 px-3">fix: please work this time holy shit</td>
+<td class="py-1.5 px-3 text-rose-400">+1 / -1</td>
+<td class="py-1.5 px-3 text-right"><span class="bg-rose-950 text-rose-300 px-1 border border-rose-800 text-[9px]">PRAYER-DRIVEN</span></td>
+</tr>
+<tr class="hover:bg-blueprint-mid/50 transition-colors">
+<td class="py-1.5 px-3 font-bold text-hazard-amber">deadbeef</td>
+<td class="py-1.5 px-3 text-blueprint-cyan">senior_intern</td>
+<td class="py-1.5 px-3">wip: rollback everything before demo</td>
+<td class="py-1.5 px-3 text-emerald-400">+12 / -840</td>
+<td class="py-1.5 px-3 text-right"><span class="bg-amber-950 text-hazard-amber px-1 border border-amber-800 text-[9px]">TACTICAL RETREAT</span></td>
+</tr>
+<tr class="hover:bg-blueprint-mid/50 transition-colors">
+<td class="py-1.5 px-3 font-bold text-hazard-amber">7b3f91a</td>
+<td class="py-1.5 px-3 text-blueprint-cyan">lead_architect</td>
+<td class="py-1.5 px-3">test: remove failing assertions so build stays green</td>
+<td class="py-1.5 px-3 text-rose-400">+0 / -145</td>
+<td class="py-1.5 px-3 text-right"><span class="bg-rose-950 text-rose-300 px-1 border border-rose-800 text-[9px]">CRIME OF PASSION</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- END: Live Blueprint Telemetry -->
+<!-- BEGIN: The AI Roast Output Folio (Ancient Engineering Ledger Style) -->
+<section class="border-2 border-black bg-parchment p-6 sm:p-8 mb-12 shadow-[6px_6px_0px_#000] relative" data-purpose="roast-output-ledger">
+<!-- Folio Header Tape -->
+<div class="flex flex-wrap items-center justify-between border-b-2 border-black pb-4 mb-6">
+<div>
+<span class="font-mono text-[10px] tracking-widest text-black/60 uppercase">CASE FILE RECORD // FOLIO NO. 0429-A</span>
+<h2 class="text-2xl sm:text-3xl font-black font-blueprint uppercase text-blueprint-navy tracking-tight">
+            POST-MORTEM VERDICT &amp; CODEBASE AUTOPSY
+          </h2>
+</div>
+<div class="flex items-center gap-2 font-mono text-xs">
+<span class="bg-hazard-amber text-black border border-black font-bold px-2 py-1">CERTIFIED ROTTEN</span>
+<span class="text-black/60">[SEV: SENIOR BURNOUT]</span>
+</div>
+</div>
+<!-- Sarcastic Autopsy Quotation / Hero Roast Callout -->
+<div class="bg-parchment-light border-2 border-black p-5 sm:p-6 mb-8 relative shadow-[4px_4px_0px_#ffb200]">
+<div class="font-mono text-xs text-blueprint-navy font-bold uppercase mb-2 flex items-center gap-2">
+<span>⚖️</span>
+<span>CHIEF ARCHIVIST SUMMARY INQUEST:</span>
+</div>
+<blockquote id="roast-story-text" class="text-base sm:text-lg font-blueprint font-bold text-ink italic leading-relaxed whitespace-pre-line">
+          “This repository is an astonishing masterclass in architectural optimism colliding headfirst into 2:45 AM desperation. Your commit log reads like the frantic diary of a Victorian naval explorer slowly succumbing to scurvy—except instead of mapping the Northwest Passage, you spent four days trying to vertically center a login card in CSS. The presence of twelve commented-out `console.log('HERE 2')` statements is considered a Class-B federal felony in four jurisdictions.”
+        </blockquote>
+<div class="mt-4 pt-3 border-t border-black/20 flex flex-wrap justify-between items-center text-xs font-mono text-black/60">
+<span>SIGNED: L. Torvalds (Honorary Spectral Proxy)</span>
+<span>STATUS: AUTOPSY VERIFIED // GROQ AI</span>
+</div>
+</div>
+<!-- Specific Code Smells & Crime Ledger -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<!-- Crime 1 -->
+<div class="border-2 border-black bg-parchment-light p-4 relative flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-center text-[10px] font-mono mb-2 text-rose-800 font-bold">
+<span>CRIME NO. 01</span>
+<span>PRIORITY: CRITICAL</span>
+</div>
+<h3 class="font-mono font-bold text-sm uppercase text-blueprint-navy mb-2">
+              The "Fix Build" Infinite Loop
+            </h3>
+<p class="text-xs font-mono text-black/80 leading-normal">
+              7 consecutive commits titled variants of <code>"fix build"</code>, <code>"pls fix"</code>, and <code>"trying again"</code> without a single local test execution. CI minutes incinerated: 412 min.
+            </p>
+</div>
+<div class="mt-4 pt-2 border-t border-black/20 text-[10px] font-mono text-black/60">
+            CULPRIT: Premature Push Syndrome
+          </div>
+</div>
+<!-- Crime 2 -->
+<div class="border-2 border-black bg-parchment-light p-4 relative flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-center text-[10px] font-mono mb-2 text-hazard-deep font-bold">
+<span>CRIME NO. 02</span>
+<span>PRIORITY: SEVERE</span>
+</div>
+<h3 class="font-mono font-bold text-sm uppercase text-blueprint-navy mb-2">
+              Any-Type Omnipresence
+            </h3>
+<p class="text-xs font-mono text-black/80 leading-normal">
+              Found 94 instances of <code>: any</code> in TypeScript files. You didn't adopt TypeScript for type safety; you adopted it so your IDE can judge you in real-time.
+            </p>
+</div>
+<div class="mt-4 pt-2 border-t border-black/20 text-[10px] font-mono text-black/60">
+            PENALTY: Compulsory Pure Haskell Camp
+          </div>
+</div>
+<!-- Crime 3 -->
+<div class="border-2 border-black bg-parchment-light p-4 relative flex flex-col justify-between">
+<div>
+<div class="flex justify-between items-center text-[10px] font-mono mb-2 text-blueprint-navy font-bold">
+<span>CRIME NO. 03</span>
+<span>PRIORITY: CHRONIC</span>
+</div>
+<h3 class="font-mono font-bold text-sm uppercase text-blueprint-navy mb-2">
+              The Ghost Architecture
+            </h3>
+<p class="text-xs font-mono text-black/80 leading-normal">
+              A <code>/services/v2/micro/</code> folder containing 8 empty files named <code>factory.ts</code>, waiting for an imaginary client load that will mathematically never occur.
+            </p>
+</div>
+<div class="mt-4 pt-2 border-t border-black/20 text-[10px] font-mono text-black/60">
+            STATUS: Over-engineered hallucination
+          </div>
+</div>
+</div>
+<!-- Archival Control Buttons -->
+<div class="flex flex-wrap items-center justify-between gap-3 pt-4 border-t-2 border-black font-mono text-xs">
+<div class="flex flex-wrap items-center gap-2">
+<button id="btn-export-report" class="border-2 border-black bg-white hover:bg-parchment-dark active:translate-y-0.5 px-3 py-2 font-bold shadow-[2px_2px_0px_#000] transition-all" type="button">
+            [ EXPORT AUTOPSY REPORT (.MD) ]
+          </button>
+<button id="btn-shame-badge" class="border-2 border-black bg-white hover:bg-parchment-dark active:translate-y-0.5 px-3 py-2 font-bold shadow-[2px_2px_0px_#000] transition-all" type="button">
+            [ GENERATE SHAME BADGE ]
+          </button>
+</div>
+<button id="btn-roast-another" class="border-2 border-black bg-hazard-amber hover:bg-yellow-400 active:translate-y-0.5 px-4 py-2 font-bold text-black shadow-[2px_2px_0px_#000] transition-all" type="button">
+          [ ROAST ANOTHER CODEBASE ↺ ]
+        </button>
+</div>
+</section>
+<!-- END: The AI Roast Output Folio -->
+<!-- BEGIN: Clean Technical Project Footer -->
+<footer class="mt-12 pt-6 border-t-2 border-black flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-xs text-black/70 pb-6" data-purpose="clean-project-footer">
+<div>
+<span class="font-bold text-black uppercase">GIT-TRACE // THE CODEBASE AUTOPSY</span>
+<p class="text-[10px] text-black/50">FastAPI backend · Subprocess Git engine · Groq LPU inference</p>
+</div>
+<div class="sm:text-right">
+<div class="text-xs font-bold text-blueprint-navy font-mono">100% FATAL CODE REVIEWS</div>
+<span class="text-[10px] text-black/50">Shallow clones auto-deleted immediately after analysis</span>
+</div>
+</footer>
+<!-- END: Clean Technical Project Footer -->
+</div>
+<!-- END: Main Page Frame Wrapper -->
+<!-- BEGIN: Floating Bottom Architectural Navigation Pill Dock -->
+<div class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40" data-purpose="floating-architectural-dock">
+<nav aria-label="Bottom Quick Navigation" class="bg-parchment-light border-2 border-black rounded-xl px-3 py-2 flex items-center gap-1.5 shadow-[4px_4px_0px_#000]">
+<!-- Home / Overview -->
+<button aria-label="Overview" class="p-2 hover:bg-parchment-dark rounded text-black transition-colors" title="Overview" type="button">
+<svg class="w-4 h-4" fill="currentColor" viewbox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path></svg>
+</button>
+<!-- Repo Ingestion -->
+<button aria-label="Specification" class="p-2 hover:bg-parchment-dark rounded text-black transition-colors" title="Repo Ingestion" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" x2="12" y1="16" y2="12"></line><line x1="12" x2="12.01" y1="8" y2="8"></line></svg>
+</button>
+<!-- Ledger / Stacks -->
+<button aria-label="Ledger" class="p-2 hover:bg-parchment-dark rounded text-black transition-colors" title="Commit Ledger" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+</button>
+<!-- Verdict / Autopsy -->
+<button aria-label="Verdict" class="p-2 hover:bg-parchment-dark rounded text-black transition-colors" title="Autopsy Verdict" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M18 2H6v7a6 6 0 0 0 12 0V2z"></path><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"></path><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M10 14.66V17c0 .55-.45 1-1 1H8v4h8v-4h-1c-.55 0-1-.45-1-1v-2.34"></path></svg>
+</button>
+<!-- Export / Documents -->
+<button aria-label="Export Logs" class="p-2 hover:bg-parchment-dark rounded text-black transition-colors" title="Export Documentation" type="button">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+</button>
+<!-- Active Roast Rocket Trigger -->
+<button aria-label="Execute Roast" class="ml-1 px-3 py-1.5 bg-blueprint-navy text-hazard-amber font-mono font-bold text-xs rounded-lg border border-black flex items-center gap-1.5 hover:bg-blueprint-mid active:scale-95 transition-all shadow-[2px_2px_0px_#000]" type="button">
+<span>🚀</span>
+<span class="hidden sm:inline">ROAST</span>
+</button>
+</nav>
+</div>
+<!-- END: Floating Bottom Architectural Navigation Pill Dock -->
+<!-- BEGIN: Interactive Logic for Roast Trigger & Input Handling -->
+<script data-purpose="interaction-handlers">
+    document.addEventListener('DOMContentLoaded', () => {
+      const executeBtn = document.getElementById('btn-execute-autopsy');
+      const repoInput = document.getElementById('repo-url-input');
+      const storyBlock = document.getElementById('roast-story-text');
+      const commitTableBody = document.getElementById('commit-table-body');
+      const telemetryLog = document.getElementById('telemetry-log-stream');
+      const statusTag = document.getElementById('status-tag');
+      const scanProgressLabel = document.getElementById('scan-progress-label');
+      const outputSection = document.querySelector('[data-purpose="roast-output-ledger"]');
+
+      // Severity option selection handler
+      const severityRadios = document.querySelectorAll('input[name="severity_level"]');
+      severityRadios.forEach(radio => {
+        radio.parentElement.addEventListener('click', () => {
+          severityRadios.forEach(r => {
+            r.checked = false;
+            r.parentElement.classList.remove('bg-hazard-amber/20', 'shadow-[3px_3px_0px_#000]', 'ring-2', 'ring-hazard-amber');
+            r.parentElement.classList.add('bg-parchment');
+            const badge = r.parentElement.querySelector('.selected-badge');
+            if (badge) badge.remove();
+          });
+          radio.checked = true;
+          radio.parentElement.classList.remove('bg-parchment');
+          radio.parentElement.classList.add('bg-hazard-amber/20', 'shadow-[3px_3px_0px_#000]', 'ring-2', 'ring-hazard-amber');
+          const badge = document.createElement('span');
+          badge.className = 'selected-badge absolute -top-2.5 right-2 bg-hazard-amber text-black font-mono text-[9px] font-bold px-1.5 border border-black';
+          badge.innerText = 'SELECTED';
+          radio.parentElement.appendChild(badge);
+        });
+      });
+
+      const modeMap = {
+        'mild': 'passive-aggressive',
+        'senior': 'nuclear',
+        'chaotic': 'noir',
+        'kernel': 'shakespearean'
+      };
+
+      const cynicismTags = [
+        'PRAYER-DRIVEN',
+        'TACTICAL RETREAT',
+        'CRIME OF PASSION',
+        'COPING MECHANISM',
+        '3AM DESPERATION',
+        'STACKOVERFLOW SPECIAL',
+        'COMMIT & PRAY',
+        'EXISTENTIAL CRISIS'
+      ];
+
+      async function triggerRoast() {
+        const targetRepo = repoInput.value.trim();
+        if (!targetRepo) {
+          alert('Please enter a GitHub repository URL.');
+          repoInput.focus();
+          return;
+        }
+
+        const selectedRadio = document.querySelector('input[name="severity_level"]:checked');
+        const severityVal = selectedRadio ? selectedRadio.value : 'senior';
+        const mode = modeMap[severityVal] || 'nuclear';
+
+        executeBtn.disabled = true;
+        executeBtn.innerHTML = `
+          <span class="animate-spin text-xl inline-block">⚙️</span>
+          <span>CLONING REPOSITORY & GENERATING ROAST VIA GROQ...</span>
+        `;
+        executeBtn.classList.remove('bg-hazard-amber', 'hover:bg-yellow-400');
+        executeBtn.classList.add('bg-amber-300', 'cursor-wait');
+
+        if (statusTag) {
+          statusTag.textContent = 'STATUS: CLONING_GIT_HISTORY...';
+          statusTag.className = 'text-amber-400 font-bold animate-pulse';
+        }
+        if (scanProgressLabel) {
+          scanProgressLabel.textContent = 'SCANNING IN PROGRESS...';
+        }
+
+        if (telemetryLog) {
+          telemetryLog.innerHTML = `
+            <div class="text-blueprint-cyan font-bold border-b border-blueprint-cyan/20 pb-1 flex justify-between">
+              <span>&gt;_ TELEMETRY DISPATCH</span>
+              <span>TARGET: ${targetRepo}</span>
+            </div>
+            <p class="text-emerald-400">$ git clone --depth 10 --single-branch "${targetRepo}"</p>
+            <p class="text-parchment/70">[info] Connecting to remote and shallow fetching commit log...</p>
+            <p class="text-hazard-amber font-bold">$ groq.chat.completions.create(engine="groq", mode="${mode}")...</p>
+          `;
+        }
+
+        try {
+          const response = await fetch('/api/roast', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ repo_url: targetRepo, mode: mode })
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.detail || 'Failed to roast repository.');
+          }
+
+          // 1. Update the AI roast verdict
+          if (storyBlock) {
+            storyBlock.textContent = data.story;
+          }
+
+          // 2. Update telemetry readouts
+          if (statusTag) {
+            statusTag.textContent = `STATUS: AUTOPSY_COMPLETE (${data.commits_analyzed} COMMITS)`;
+            statusTag.className = 'text-hazard-amber font-bold';
+          }
+          if (scanProgressLabel) {
+            scanProgressLabel.textContent = '100% COMPLETE';
+          }
+
+          // 3. Update the commit table if data is returned
+          if (commitTableBody && data.commits && data.commits.length > 0) {
+            commitTableBody.innerHTML = '';
+            data.commits.forEach((c, idx) => {
+              const tr = document.createElement('tr');
+              tr.className = 'hover:bg-blueprint-mid/50 transition-colors';
+              const randomTag = cynicismTags[idx % cynicismTags.length];
+              tr.innerHTML = `
+                <td class="py-1.5 px-3 font-bold text-hazard-amber">${c.hash || 'N/A'}</td>
+                <td class="py-1.5 px-3 text-blueprint-cyan">${c.author || 'Anonymous'}</td>
+                <td class="py-1.5 px-3">${c.message || 'No commit message'}</td>
+                <td class="py-1.5 px-3 text-rose-400 text-[10px]">${c.stats || '-'}</td>
+                <td class="py-1.5 px-3 text-right">
+                  <span class="bg-rose-950 text-rose-300 px-1 border border-rose-800 text-[9px]">${randomTag}</span>
+                </td>
+              `;
+              commitTableBody.appendChild(tr);
+            });
+          }
+
+          // 4. Update the telemetry stream log
+          if (telemetryLog) {
+            telemetryLog.innerHTML += `
+              <p class="text-emerald-400">[success] Ingested ${data.commits_analyzed} commits and extracted stats.</p>
+              <p class="text-emerald-400">[success] Groq AI generated brutal post-mortem autopsy.</p>
+            `;
+          }
+
+          // 5. Scroll down smoothly to verdict
+          if (outputSection) {
+            outputSection.scrollIntoView({ behavior: 'smooth' });
+          }
+
+          latestData = {
+            repo: targetRepo,
+            mode: mode,
+            story: data.story,
+            commits: data.commits || [],
+            count: data.commits_analyzed
+          };
+        } catch (err) {
+          if (statusTag) {
+            statusTag.textContent = 'STATUS: INQUEST_FAILED';
+            statusTag.className = 'text-rose-500 font-bold';
+          }
+          if (storyBlock) {
+            storyBlock.textContent = `⚠️ AUTOPSY ABORTED:\n\n${err.message}\n\nTip: Ensure your GROQ_API_KEY is configured in your environment or .env file and the repository is public and accessible.`;
+          }
+          if (outputSection) {
+            outputSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        } finally {
+          executeBtn.disabled = false;
+          executeBtn.innerHTML = `
+            <span class="text-xl">⚡</span>
+            <span>[ EXECUTE AUTOPSY // INITIATE ROAST → ]</span>
+            <span class="font-mono text-xs bg-black text-hazard-amber px-2 py-0.5 border border-black hidden sm:inline-block">DEPTH: 10</span>
+          `;
+          executeBtn.classList.remove('bg-amber-300', 'cursor-wait');
+          executeBtn.classList.add('bg-hazard-amber', 'hover:bg-yellow-400');
+        }
+      }
+
+      let latestData = null;
+
+      if (executeBtn) {
+        executeBtn.addEventListener('click', triggerRoast);
+      }
+      if (repoInput) {
+        repoInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') triggerRoast();
+        });
+      }
+
+      // Export report button
+      const exportBtn = document.getElementById('btn-export-report');
+      if (exportBtn) {
+        exportBtn.addEventListener('click', () => {
+          const repo = latestData ? latestData.repo : (repoInput.value.trim() || 'Git Repository');
+          const story = latestData ? latestData.story : (storyBlock ? storyBlock.innerText : 'No story yet.');
+          const commits = latestData && latestData.commits ? latestData.commits : [];
+          
+          let report = `# ⚖️ GIT-TRACE // REPOSITORY AUTOPSY REPORT\n\n`;
+          report += `**Target Repository:** ${repo}\n\n`;
+          report += `**Generated:** ${new Date().toLocaleString()}\n\n`;
+          report += `**Engine:** Groq AI Cloud\n\n`;
+          report += `## 📜 POST-MORTEM VERDICT\n\n`;
+          report += `${story}\n\n`;
+          if (commits.length > 0) {
+            report += `## 🔍 COMMITS ANALYZED (${commits.length})\n\n`;
+            report += `| Hash | Author | Message | Stats |\n`;
+            report += `| --- | --- | --- | --- |\n`;
+            commits.forEach(c => {
+              report += `| \`${c.hash}\` | ${c.author} | ${(c.message || '').replace(/\|/g, '-')} | ${c.stats || '-'} |\n`;
+            });
+          }
+          report += `\n---\n*Generated by Git-Trace — Archival Codebase Autopsy & Roast*\n`;
+
+          const blob = new Blob([report], { type: 'text/markdown;charset=utf-8' });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `git-trace-autopsy-${Date.now()}.md`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        });
+      }
+
+      // Generate Shame Badge button
+      const shameBtn = document.getElementById('btn-shame-badge');
+      if (shameBtn) {
+        shameBtn.addEventListener('click', () => {
+          const badgeMd = `[![Git-Trace Certified Rotten](https://img.shields.io/badge/Git--Trace-Certified_Rotten-ffb200?style=for-the-badge&logo=git&logoColor=black)](http://127.0.0.1:8000)`;
+          navigator.clipboard.writeText(badgeMd).then(() => {
+            const originalText = shameBtn.innerText;
+            shameBtn.innerText = '✓ COPIED BADGE TO CLIPBOARD!';
+            shameBtn.classList.add('bg-hazard-amber');
+            setTimeout(() => {
+              shameBtn.innerText = originalText;
+              shameBtn.classList.remove('bg-hazard-amber');
+            }, 2500);
+          }).catch(() => {
+            prompt('Copy your README Shame Badge:', badgeMd);
+          });
+        });
+      }
+
+      // Roast Another Codebase button
+      const roastAnotherBtn = document.getElementById('btn-roast-another');
+      if (roastAnotherBtn) {
+        roastAnotherBtn.addEventListener('click', () => {
+          repoInput.value = '';
+          repoInput.focus();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // Dock navigation buttons
+      const dockNav = document.querySelector('[data-purpose="floating-architectural-dock"]');
+      if (dockNav) {
+        const dockButtons = dockNav.querySelectorAll('button');
+        if (dockButtons[0]) dockButtons[0].addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        if (dockButtons[1]) dockButtons[1].addEventListener('click', () => document.querySelector('[data-purpose="repo-ingestion-module"]')?.scrollIntoView({ behavior: 'smooth' }));
+        if (dockButtons[2]) dockButtons[2].addEventListener('click', () => document.querySelector('[data-purpose="telemetry-blueprint-terminal"]')?.scrollIntoView({ behavior: 'smooth' }));
+        if (dockButtons[3]) dockButtons[3].addEventListener('click', () => document.querySelector('[data-purpose="roast-output-ledger"]')?.scrollIntoView({ behavior: 'smooth' }));
+        if (dockButtons[4]) dockButtons[4].addEventListener('click', () => exportBtn?.click());
+        if (dockButtons[5]) dockButtons[5].addEventListener('click', triggerRoast);
+      }
+    });
+  </script>
+<!-- END: Interactive Logic -->
+</body></html>
